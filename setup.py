@@ -16,6 +16,5 @@ setup(
     description='Bit9 API for their Cyber Forensics Service',
     install_requires=[
         "requests >= 2.2.1",
-        "colorama",
     ],
 )
