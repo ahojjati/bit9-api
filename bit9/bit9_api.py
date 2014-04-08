@@ -84,7 +84,7 @@ class Bit9Api():
         :param flag: The amount of detail you want in the response.
         :return: Query results in the format specified (json or xml)
         """
-        hash_type, hash_list = __vaildate_input(hash_list)
+        hash_type, hash_list = vaildate_input(hash_list)
         if hash_list:
             if isinstance(hash_list, basestring):
                 url = self.baseurl + self.version + "/hashinfo/lookup." + self.data_format
@@ -121,13 +121,13 @@ class Bit9Api():
                             response_code=400)
 
     def __lookup_extended(self, this_hash, lookup_type):
-        """
+        """ Perform a single hash query using the Extended View API Functionality
 
-        :param this_hash:
-        :param lookup_type:
+        :param this_hash: Single hash (md5, sha1 or sha256)
+        :param lookup_type: Extended View API endpoint type
         :return: Query results in the format specified (json or xml)
         """
-        hash_type, this_hash = __vaildate_input(this_hash)
+        hash_type, this_hash = vaildate_input(this_hash)
         if isinstance(this_hash, basestring):
             url = self.baseurl + self.version + lookup_type + "/lookup." + self.data_format
             values = dict(username=self.user, password=self.password, tool=self.tool)
@@ -224,7 +224,7 @@ class BadDataFormat(ApiError):
         return repr(self.value)
 
 
-def __vaildate_input(user_input):
+def vaildate_input(user_input):
     """ Validate File Hash Input.
 
     :param user_input: Input string or list
