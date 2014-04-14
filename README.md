@@ -2,6 +2,7 @@
 
 bit9-api
 ========
+[![Build Status](https://travis-ci.org/blacktop/bit9-api.svg?branch=master)](https://travis-ci.org/blacktop/bit9-api)
 
 Bit9 API for their Cyber Forensics Service
 
