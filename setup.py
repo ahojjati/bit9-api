@@ -5,9 +5,9 @@ except ImportError:
     from distutils.core import setup
 
 setup(
-    name='bit9_api',
+    name='bit9-api',
     test_suite="tests",
-    version='1',
+    version='1.0.0',
     packages=['bit9', 'bit9.test'],
     url='https://github.com/blacktop/bit9-api',
     license='GPLv3',

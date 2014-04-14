@@ -11,20 +11,22 @@ import requests
 
 class Bit9Api():
     """
-    The Bit9 Cyber Forensics Service can be used to access information in the Bit9 Global Software Registry (GSR) to
-    help identify, validate, and assign reputation to unknown software. The GSR provides identification, authentication,
-    and metadata for over 5 billion file records. It pulls data from a combination of distribution partners, web
-    crawlers, honeypots, and Bit9's own organic community, adding software files and metadata to the database. Software
-    in the GSR is also screened by multiple anti-malware tools and cross-referenced against third- party vulnerability
-    databases.
+    The Bit9 Cyber Forensics Service can be used to access information in the Bit9 Global Software
+    Registry (GSR) to help identify, validate, and assign reputation to unknown software. The GSR
+    provides identification, authentication, and metadata for over 5 billion file records. It pulls
+    data from a combination of distribution partners, web crawlers, honeypots, and Bit9's own
+    organic community, adding software files and metadata to the database. Software in the GSR is
+    also screened by multiple anti-malware tools and cross-referenced against third- party
+    vulnerability databases.
 
-    The Cyber Forensics Service is commonly used to find more information about files for which you have hash values
-    (MD5, SHA1 or SHA256). This information includes identifying malware and filtering known good software to accelerate
-    investigations and isolate advanced threats and suspect files.
+    The Cyber Forensics Service is commonly used to find more information about files for which you
+    have hash values (MD5, SHA1 or SHA256). This information includes identifying malware and
+    filtering known good software to accelerate investigations and isolate advanced threats and
+    suspect files.
 
-    This document describes the Web Services Interface for the Cyber Forensics Service, including the query methods you
-    can use to look up information about files and the data the service returns. The information returned in lookup
-    results can be custom-tuned for your purposes.
+    This document describes the Web Services Interface for the Cyber Forensics Service, including
+    the query methods you can use to look up information about files and the data the service
+    returns. The information returned in lookup results can be custom-tuned for your purposes.
     """
 
     def __init__(self, user=None, password=None, data_format='json', proxies=None):
@@ -51,13 +53,15 @@ class Bit9Api():
     def lookup_usageinfos(self):
         """ CFS Usage Information: Queries with the Usageinfos Object
 
-        A query using the usageinfos object type provides you with information about your usage of the Cyber Forensics
-        API. If you have defined “data” and “tool” arguments, you can use them in a usageinfos query to track how many
-        CFS queries each of your customers has made and what tools they have used to make the queries. Usageinfos
-        queries return only information for API calls made using your Cyber Forensics Service username and password.
+        A query using the usageinfos object type provides you with information about your usage of
+        the Cyber Forensics API. If you have defined “data” and “tool” arguments, you can use them
+        in a usageinfos query to track how many CFS queries each of your customers has made and what
+        tools they have used to make the queries. Usageinfos queries return only information for API
+        calls made using your Cyber Forensics Service username and password.
 
-        Note: The query counts for usageinfo are updated periodically, not in real time. Bit9 recommends that usageinfo
-        queries have an end date (the todateutc argument) no later than one day prior to the current date.
+        Note: The query counts for usageinfo are updated periodically, not in real time. Bit9
+        recommends that usageinfo queries have an end date (the todateutc argument) no later than
+        one day prior to the current date.
 
         :return: Usage results
         """
@@ -90,11 +94,12 @@ class Bit9Api():
                 url = self.baseurl + self.version + "/hashinfo/lookup." + self.data_format
             else:
                 if len(hash_list) > 1000:
-                    return dict(error='Malformed Input - Can only query 1000 hashes at a time.', response_code=400)
+                    return dict(error='Malformed Input - Can only query 1000 hashes at a time.',
+                                response_code=400)
                 else:
                     url = self.baseurl + self.version + "/hashinfos/lookup." + self.data_format
-            values = dict(username=self.user, password=self.password, flags=flag, proxies=self.proxies,
-                          tool=self.tool)
+            values = dict(username=self.user, password=self.password, flags=flag, tool=self.tool,
+                          proxies=self.proxies)
             values[hash_type] = hash_list
             try:
                 response = requests.post(url, values, proxies=self.proxies)
@@ -117,8 +122,8 @@ class Bit9Api():
             if hash_type == 'none':
                 return dict(error='Malformed Input - needs to be a md5, sha1 or sha256 hash.', response_code=400)
             if hash_type == 'mixed':
-                return dict(error='Malformed Input - needs to be all the same type of md5/sha1/sha256 hash.',
-                            response_code=400)
+                return dict(response_code=400,
+                            error='Malformed Input - needs to be all the same type of md5/sha1/sha256 hash.')
 
     def __lookup_extended(self, this_hash, lookup_type):
         """ Perform a single hash query using the Extended View API Functionality
@@ -155,7 +160,8 @@ class Bit9Api():
     def lookup_certificates(self, this_hash):
         """ Lookups Using the Certificates Object Type.
 
-        A query using the certificates object type provides certificate information for the specified hash.
+        A query using the certificates object type provides certificate information for the
+        specified hash.
 
         Note: This API for this object type is available only to users licensed for the Extended View.
 
@@ -167,8 +173,8 @@ class Bit9Api():
     def lookup_files(self, this_hash):
         """ Lookups Using the Files Object Type.
 
-        A query using the files object type provides file information such as the file type, the file parent and the
-        file package for the specified hash.
+        A query using the files object type provides file information such as the file type, the
+        file parent and the file package for the specified hash.
 
         Note: This API for this object type is available only to users licensed for the Extended View.
 
@@ -180,8 +186,9 @@ class Bit9Api():
     def lookup_packages(self, this_hash):
         """ Lookups Using the Packages Object Type.
 
-        A query using the packages object type provides package information for the specified hash, including the
-        operating system, company and source, number of files in the package, and packages title.
+        A query using the packages object type provides package information for the specified hash,
+        including the operating system, company and source, number of files in the package, and
+        packages title.
 
         Note: This API for this object type is available only to users licensed for the Extended View.
 
@@ -193,8 +200,8 @@ class Bit9Api():
     def lookup_scanresults(self, this_hash):
         """ Lookups Using the Scanresults Object Type.
 
-        A query using the scanresults object type provides the results of AV scans, if any, performed on the file
-        represented by the specified hash.
+        A query using the scanresults object type provides the results of AV scans, if any,
+        performed on the file represented by the specified hash.
 
         Note: This API for this object type is available only to users licensed for the Extended View.
 
