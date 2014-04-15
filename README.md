@@ -31,7 +31,8 @@ calc_exe_md5 = '60B7C0FEAD45F2066E5B805A91F4F0FC'
 response =  bit9.lookup_hashinfo(calc_exe_md5)
 print json.dumps(response, sort_keys=False, indent=4)
 ```
-Output:
+
+#### Output:
 ```json
 {
     "hashinfo": {
