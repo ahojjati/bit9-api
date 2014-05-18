@@ -1,8 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-__author__ = 'Josh Maine'
-__version__ = '1.0.1'
-__license__ = 'GPLv3'
+
+"""
+bit9-api
+~~~~~~~~~~~~
+
+This module implements the Bit9 API.
+
+:copyright: (c) 2014 by Josh "blacktop" Maine.
+:license: GPLv3, see LICENSE for more details.
+
+"""
 
 import re
 
@@ -125,7 +133,7 @@ class Bit9Api():
                 return dict(response_code=400,
                             error='Malformed Input - needs to be all the same type of md5/sha1/sha256 hash.')
 
-    def __lookup_extended(self, this_hash, lookup_type):
+    def _lookup_extended(self, this_hash, lookup_type):
         """ Perform a single hash query using the Extended View API Functionality
 
         :param this_hash: Single hash (md5, sha1 or sha256)
@@ -168,7 +176,7 @@ class Bit9Api():
         :param this_hash: Single hash (md5, sha1 or sha256)
         :return: Query results in the format specified (json or xml)
         """
-        return self.__lookup_extended(this_hash, "/certificates")
+        return self._lookup_extended(this_hash, "/certificates")
 
     def lookup_files(self, this_hash):
         """ Lookups Using the Files Object Type.
@@ -181,7 +189,7 @@ class Bit9Api():
         :param this_hash: Single hash (md5, sha1 or sha256)
         :return: Query results in the format specified (json or xml)
         """
-        return self.__lookup_extended(this_hash, "/files")
+        return self._lookup_extended(this_hash, "/files")
 
     def lookup_packages(self, this_hash):
         """ Lookups Using the Packages Object Type.
@@ -195,7 +203,7 @@ class Bit9Api():
         :param this_hash: Single hash (md5, sha1 or sha256)
         :return: Query results in the format specified (json or xml)
         """
-        return self.__lookup_extended(this_hash, "/packages")
+        return self._lookup_extended(this_hash, "/packages")
 
     def lookup_scanresults(self, this_hash):
         """ Lookups Using the Scanresults Object Type.
@@ -208,7 +216,7 @@ class Bit9Api():
         :param this_hash: Single hash (md5, sha1 or sha256)
         :return: Query results in the format specified (json or xml)
         """
-        return self.__lookup_extended(this_hash, "/scanresults")
+        return self._lookup_extended(this_hash, "/scanresults")
 
 
 class ApiError(Exception):
@@ -240,12 +248,12 @@ def vaildate_input(user_input):
     #: Check that input is a string
     if not isinstance(user_input, basestring):
         #: If not, make it a string
-        user_input = __list_to_string(user_input)
+        user_input = _list_to_string(user_input)
     #: Check that it is at least as long as a md5 hash
     if len(user_input) >= 32:
-        found_md5s = __extract_md5_from_hash_list(user_input)
-        found_sha1s = __extract_sha1_from_hash_list(user_input)
-        found_sha256 = __extract_sha256_from_hash_list(user_input)
+        found_md5s = _extract_md5_from_hash_list(user_input)
+        found_sha1s = _extract_sha1_from_hash_list(user_input)
+        found_sha256 = _extract_sha256_from_hash_list(user_input)
         #: Check that hash list is not empty or mixed
         if found_md5s and not found_sha1s and not found_sha256:
             return 'md5', found_md5s
@@ -260,7 +268,7 @@ def vaildate_input(user_input):
     return 'none', False
 
 
-def __extract_md5_from_hash_list(data):
+def _extract_md5_from_hash_list(data):
     """ Extract all md5 hashes from a string.
 
     :param data: Input string
@@ -274,7 +282,7 @@ def __extract_md5_from_hash_list(data):
         return hash_list
 
 
-def __extract_sha1_from_hash_list(data):
+def _extract_sha1_from_hash_list(data):
     """ Extract all sha1 hashes from a string.
 
     :param data: Input string
@@ -288,7 +296,7 @@ def __extract_sha1_from_hash_list(data):
         return hash_list
 
 
-def __extract_sha256_from_hash_list(data):
+def _extract_sha256_from_hash_list(data):
     """ Extract all sha256 hashes from a string.
 
     :param data: Input string
@@ -302,7 +310,7 @@ def __extract_sha256_from_hash_list(data):
         return hash_list
 
 
-def __list_to_string(this_list):
+def _list_to_string(this_list):
     """ Convert list to string.
 
     :param this_list: Hash list
