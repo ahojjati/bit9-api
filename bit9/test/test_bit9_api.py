@@ -1,12 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-__author__ = 'Josh Maine'
-__version__ = '1.0.1'
-__license__ = 'GPLv3'
+"""
+test-bit9-api
+~~~~~~~~~~~~
 
+This module tests the Bit9 API.
+
+:copyright: (c) 2014 by Josh "blacktop" Maine.
+:license: GPLv3, see LICENSE for more details.
+
+"""
 import json
 from unittest import TestCase
-from bit9.bit9_api import Bit9Api, BadCreds, BadDataFormat
+from bit9 import Bit9Api, BadCreds, BadDataFormat
 
 USER = 'user'
 PASSWORD = 'password'

@@ -25,5 +25,5 @@ setup(name='bit9-api'
         ,license=bit9.__license__
         ,test_suite="tests"
         ,packages=['bit9']
-        ,package_dir={'requests': 'requests'}
+        ,package_dir={'bit9': 'bit9'}
         ,install_requires=["requests >= 2.2.1"])
