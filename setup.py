@@ -2,7 +2,7 @@
 import os
 import sys
 
-import bit9
+import bit9_api
 
 from setuptools import setup
 
@@ -16,14 +16,14 @@ with open('HISTORY.rst') as f:
     history = f.read()
 
 setup(name='bit9-api'
-        ,version=bit9.__version__
+        ,version=bit9_api.__version__
         ,description='Bit9 API for their Cyber Forensics Service'
         ,long_description=readme + '\n\n' + history
         ,url='https://github.com/blacktop/bit9-api'
         ,author='blacktop'
         ,author_email='dev@blacktop.io'
-        ,license=bit9.__license__
+        ,license=bit9_api.__license__
         ,test_suite="tests"
-        ,packages=['bit9']
-        ,package_dir={'bit9': 'bit9'}
+        ,packages=['bit9_api']
+        ,package_dir={'bit9_api': 'bit9_api'}
         ,install_requires=["requests >= 2.2.1"])
