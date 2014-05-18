@@ -14,7 +14,10 @@ This module implements the Bit9 API.
 
 import re
 
-import requests
+try:
+    import requests
+except ImportError:
+    pass
 
 
 class Bit9Api():
