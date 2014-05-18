@@ -119,9 +119,9 @@ class Bit9Api():
 
             if response.status_code == requests.codes.ok:
                 if self.data_format == 'json':
-                    return response.json()
+                    return dict(results=response.json(), response_code=response.status_code)
                 else:
-                    return response.content
+                    return dict(results=response.content, response_code=response.status_code)
             elif response.status_code == 404:
                 return dict(error='Not Found.', response_code=response.status_code)
             elif response.status_code == 401:
@@ -155,9 +155,9 @@ class Bit9Api():
 
             if response.status_code == requests.codes.ok:
                 if self.data_format == 'json':
-                    return response.json()
+                    return dict(results=response.json(), response_code=response.status_code)
                 else:
-                    return response.content
+                    return dict(results=response.content, response_code=response.status_code)
             elif response.status_code == 404:
                 return dict(error='Not Found.', response_code=response.status_code)
             elif response.status_code == 401:
