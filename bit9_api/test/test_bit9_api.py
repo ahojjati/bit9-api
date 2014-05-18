@@ -12,7 +12,7 @@ This module tests the Bit9 API.
 """
 import json
 from unittest import TestCase
-from bit9 import Bit9Api, BadCreds, BadDataFormat
+from bit9_api import Bit9Api, BadCreds, BadDataFormat
 
 USER = 'user'
 PASSWORD = 'password'
