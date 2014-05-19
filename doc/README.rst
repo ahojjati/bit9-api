@@ -29,7 +29,7 @@ Installation
 
 Usage
 -----
-.. code-block:: pycon
+.. code-block:: python
 
     import json
     from bit9 import Bit9Api
