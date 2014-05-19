@@ -32,7 +32,7 @@ Usage
 .. code-block:: python
 
     import json
-    from bit9 import Bit9Api
+    from bit9_api import Bit9Api
 
     USER = 'user'
     PASSWORD = 'password'
