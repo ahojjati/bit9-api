@@ -6,7 +6,7 @@ bit9-api
 .. image:: https://travis-ci.org/blacktop/bit9-api.svg?branch=master
     :target: https://travis-ci.org/blacktop/bit9-api
 
-.. image:: https://badge.fury.io/py/bit9-api.svg
+.. image:: https://badge.fury.io/py/bit9-api.png
     :target: http://badge.fury.io/py/bit9-api
 
 .. image:: https://pypip.in/d/bit9-api/badge.png

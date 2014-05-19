@@ -3,6 +3,13 @@
 Release History
 ---------------
 
+1.0.5 (2014-05-18)
+------------------
+
+**Bugfixes**
+
+- Fixing README.rst for better PYPI presentation.
+
 1.0.2 (2014-05-18)
 ------------------
 
